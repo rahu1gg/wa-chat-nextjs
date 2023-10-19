@@ -1,6 +1,11 @@
 import Header from '@/components/pages/header';
 import { Contacts, DeleteContactBtn } from '@/components/pages/history/client';
 import { Trash2 } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Wa Chat - History',
+};
 
 export default function page() {
 	return (
