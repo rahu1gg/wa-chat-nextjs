@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { DAIL_CODES } from '@/constants/dail-codes';
 import { WA_URL } from '@/constants/wa-chat';
 import { cn } from '@/lib/utils/cn';
+import { getLocalStorage, setLocalStorage } from '@/lib/utils/local-storage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import { useRef } from 'react';
@@ -29,8 +30,12 @@ export default function TelNumberForm() {
 	});
 
 	function handleSubmit(data: z.infer<typeof formSchema>) {
-		console.log(data);
-		waRef.current!.href = `${WA_URL}${data.country}${data.tel}/?text=Hey...`;
+		// update local-storage with the phone-number
+		const phone = `${data.country}${data.tel}`;
+		const contacts: string[] = JSON.parse(getLocalStorage('contacts', JSON.stringify([])) as string);
+		!contacts.includes(phone) && setLocalStorage('contacts', JSON.stringify([...contacts, phone]));
+
+		waRef.current!.href = `${WA_URL}/${phone}?text=Hey...`;
 		waRef.current!.click();
 	}
 

@@ -2,18 +2,18 @@ type Key = {
 	contacts: string;
 };
 
-export function getLocalStore(key: keyof Key) {
+export function getLocalStorage(key: keyof Key, initialValue?: string) {
 	const val = localStorage.getItem(key);
 
-	if (val === null) {
-		setLocalStore(key, '');
-		return getLocalStore(key);
+	if (val === null && initialValue) {
+		setLocalStorage(key, initialValue);
+		return localStorage.getItem(key);
 	}
 
 	return val;
 }
 
-export function setLocalStore(key: keyof Key, payload: string) {
+export function setLocalStorage(key: keyof Key, payload: string) {
 	localStorage.setItem(key, payload);
 	return true;
 }
