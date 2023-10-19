@@ -3,6 +3,8 @@ type Key = {
 };
 
 export function getLocalStorage(key: keyof Key, initialValue?: string) {
+	if (typeof window === 'undefined') return '';
+
 	const val = localStorage.getItem(key);
 
 	if (val === null && initialValue) {
