@@ -1,4 +1,4 @@
-export const dailCodes = [
+export const DAIL_CODES = [
 	{
 		country: 'Afghanistan',
 		code: '93',

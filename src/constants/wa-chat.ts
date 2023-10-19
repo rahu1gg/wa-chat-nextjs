@@ -1,1 +1,1 @@
-export const waUrl = 'https://wa.me/';
+export const WA_URL = 'https://wa.me/';
